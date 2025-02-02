@@ -67,13 +67,16 @@ sudo nginx -t
 sudo systemctl restart nginx
 
 # supervisor configuration
+sudo mkdir -p /home/ubuntu/logs
+sudo chown ubuntu:ubuntu /home/ubuntu/logs
 sudo cp $SCRIPT_DIR/supervisor/supervisord.conf /etc/supervisor/supervisord.conf
 sudo supervisorctl reread
 sudo supervisorctl update
+sudo systemctl restart supervisor
 sudo systemctl enable supervisor
 
 # crontab configuration
-crontab -l > /tmp/crontab.tmp
+sudo -u ubuntu -s /bin/bash -c "crontab -l > /tmp/crontab.tmp"
 cat $SCRIPT_DIR/crontab/cron >> /tmp/crontab.tmp
-crontab /tmp/crontab.tmp
+sudo -u ubuntu -s /bin/bash -c "crontab /tmp/crontab.tmp"
 rm /tmp/crontab.tmp
