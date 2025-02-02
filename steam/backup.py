@@ -6,8 +6,8 @@ import json
 import os
 import zipfile
 
-from discord import discord
-from rcon import rcon
+from discord_msg import discord
+from rcon_msg import rcon
 
 def msg(client, msg):
     client.run('Broadcast', msg.replace(' ', '\t'))

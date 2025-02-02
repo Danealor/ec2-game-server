@@ -46,8 +46,13 @@ sudo find /home/steam -maxdepth 1 -type f -exec chown steam:steam {} \;
 
 # Setup python
 sudo -u steam -s /bin/bash -c "python -m venv /home/steam/venv && /home/steam/venv/bin/pip install -r /home/steam/requirements.txt"
-sudo -u steam -s /bin/bash -c "echo 'export RCON_ADMIN_PASSWORD=$RCON_ADMIN_PASSWORD' >> /home/steam/.bashrc"
-sudo -u steam -s /bin/bash -c "echo 'export DISCORD_WEBHOOK_URL=$DISCORD_WEBHOOK_URL' >> /home/steam/.bashrc"
+# Create params.json with RCON and Discord settings
+sudo -u steam bash -c "cat > /home/steam/params.json << 'EOL'
+{
+    \"rcon_password\": \"$RCON_ADMIN_PASSWORD\",
+    \"discord_webhook\": \"$DISCORD_WEBHOOK_URL\"
+}
+EOL"
 
 if $INSTALL_WINE; then
   # Wine installation (https://github.com/bonsaibauer/enshrouded_server_ubuntu)

@@ -2,6 +2,7 @@
 
 PUBLIC_IP=$(curl -s https://api.ipify.org)
 QUERY_PORT=15637
+DISCORD_WEBHOOK_URL=$(jq -r '.discord_webhook' "$(dirname "$0")/params.json")
 
 send_discord_message() {
     JSON_DATA="{\"content\": \"$@\"}"

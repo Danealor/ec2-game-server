@@ -1,2 +1,5 @@
 rcon
 steamquery
+pandas
+requests
+json
