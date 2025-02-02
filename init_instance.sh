@@ -42,6 +42,7 @@ sudo apt install -y steamcmd
 # Copy our scripts over
 sudo -u steam -s /bin/bash -c "echo 'export PATH=$PATH:/usr/games' >> /home/steam/.bashrc"
 sudo cp $SCRIPT_DIR/steam/* /home/steam/
+sudo find /home/steam -maxdepth 1 -type f -exec chown steam:steam {} \;
 
 # Setup python
 sudo -u steam -s /bin/bash -c "python -m venv /home/steam/venv && /home/steam/venv/bin/pip install -r /home/steam/requirements.txt"
@@ -58,6 +59,7 @@ if $INSTALL_WINE; then
   sudo apt update
   sudo apt install -y --install-recommends winehq-staging
   sudo apt install -y cabextract winbind screen xvfb
+  sudo -u steam -s /bin/bash -c 'wine64 cmd.exe /c mkdir "%LocalAppData%Low"' # Yeah, we need LocalAppDataLow...
 fi
 
 # nginx configuration
