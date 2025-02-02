@@ -1,0 +1,5 @@
+#!/bin/bash
+
+git clone https://github.com/Danealor/ec2-game-server.git
+cd ec2-game-server
+./init_instance.sh --wine --rcon "password" --discord "https://discord.com/api/webhooks/1234567890/abcdefghijklmnopqrstuvwxyz"
